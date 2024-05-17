@@ -13,7 +13,7 @@ VALUES ('$nome', '$cpf', '$dataNasc')" );
 
 if ($result) {
     // Se a inserção foi bem-sucedida, redirecione para a página inicial
-    header("Location: teste.php");
+    header("Location: ../index.php");
     exit;
 } else if($result) {
     echo "Erro ao inserir dados: " . mysqli_error($conexao);

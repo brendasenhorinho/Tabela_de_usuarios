@@ -1,161 +1,80 @@
 <?php
-include_once('config.php');
+include_once('./php/config.php');
 
+// Executa a consulta SQL
 $sql = "SELECT * FROM tabela_usuario ORDER BY cpf DESC";
-
 $result = $conexao->query($sql);
 
+// Verifica se a consulta foi bem-sucedida
+if ($result === false) {
+    die("Erro na consulta: " . $conexao->error);
+}
+
+// Função para formatar o CPF
+function formatCpf($cpf) {
+    // Remove quaisquer caracteres que não sejam dígitos
+    $cpf = preg_replace('/\D/', '', $cpf);
+
+    // Verifica se o CPF tem exatamente 11 dígitos
+    if (strlen($cpf) !== 11) {
+        return 'CPF inválido';
+    }
+
+    // Formata o CPF
+    return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $cpf);
+}
+// Função para formatar a data
+function formatDate($date) {
+    $dateObject = DateTime::createFromFormat('Y-m-d', $date);
+    return $dateObject->format('d/m/Y');
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Usuários</title>
-    <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./styles/teste.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Tabela de Usuaríos</title>
 </head>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-:root{
-    --cor-fonte:#FFFFFF;
-    --fonte-principal: 'Poppins';
-}
-
-*{
-    margin: 0;
-    padding: 0;
-}
-
-#body{ 
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: var(--fonte-principal);
-    background: linear-gradient(-40deg, rgb(227, 254, 247), rgb(119, 176, 170), rgb(19, 93, 102));
-
-}
-
-.corpo{
-   background-color: #003C43;
-   border-radius: 10px;
-    padding: 80px;
-    position: absolute;
-    top:10%;
-    left:40%;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-}
-.botao_adcionar{
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-    color: var(--cor-fonte);
-    
-    
-}
-
-.tabela{
-    margin-top: 1em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-   
-}
-
-.botao_dados {
-    flex-direction: column;
-
-}
-
-.input_usuario {
-    display: none;
-}
-
-.informacao-header {
-    cursor: pointer;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    min-width: 200px;
-}
-
-.infomacao-oculto {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-}
-
-.input_usuario:checked + .informacao-header + .infomacao-oculto {
-    max-height: 2000px; 
-}
-
-.titulo{
-    text-align: center;
-}
-
-.custom-icon{
-    color: #77B0AA;
-}
-
-.informacao-header{
-    background-color: #003C43;
-    padding: 8px;
-    
-}
-
-.input_usuario{
-    width: 3em;
-}
-
-
-</style>
-
-<body id="body">
-    <div class="corpo">
-        <div class="botao_adcionar">
-            <h1 class="titulo">USUÁRIOS</h1>
-            <a href="./formulario.html">
+<body>
+    <div id="to_do">
+        <form action="" class="to-do-form">
+            <h1>Usuários</h1>
+            <a href="./formulario.html" class="action_botao">
                 <i class="bi bi-plus-circle-fill custom-icon"></i>
             </a>
-        </div>
+        </form>
         
-            
-            <div class="tabela">
-            <?php while($user_data = mysqli_fetch_assoc($result)): ?>
-                <div class="botao_dados">   
-                    <input type="checkbox" id="botao_usuarios" class="input_usuario">
-                            <label id="nome" class="informacao-header" for="botao_usuarios" ><?php echo $user_data['nome']; ?></label>
-                            <div class="infomacao-oculto">
-                                <div class="informacao-body">
-                                <p id="cpf"><?php echo $user_data['cpf']; ?></p>
-
-                                    <p id="dataNasc"><?php echo $user_data['dataNasc']; ?></p>
-                                </div>
-                            </div>
-                            
-                </div>             
-                            <div class="task-acao">
-                                <a href="" class="acao_botao editar_botao">
-                                    <i class="bi bi-pencil-square custom-icon"></i>
-                                </a>
-                                
-                                <a href="./delete.php?cpf=<?= $user_data['cpf'] ?>" class="acao_botao delete_botao custom-icon">
-                                    <i class="bi bi-trash3"></i>
-                                </a>
-                            </div>
-
-            
-                            <?php endwhile; ?>
-                            
-            </div>
-    </div>    
-    
-   
+        <div id="tasks">
+            <?php 
+            $counter = 1; 
+            while ($user_data = mysqli_fetch_assoc($result)): ?>
+                <div class="task">
+                    <button type="button" name="progress" class="progress" onclick="ligarEDesligarDiv('oculto_<?php echo $counter; ?>');">Info</button>
+                    <p class="task-description">
+                        <?php echo $user_data['nome']; ?>
+                    </p>
+                    <div class="oculto" id="oculto_<?php echo $counter; ?>" style="display: none;">
+                        <p><strong> CPF: <?php echo formatCpf($user_data['cpf']); ?></strong></p>
+                        <p><strong>Data: <?php echo formatDate($user_data['dataNasc']); ?></strong></p>
+                    </div>
+                    <div class="task-actions">
+                        <a href="./php/editar.php?cpf=<?= $user_data['cpf']?>" class="action_botao edit_botao">
+                            <i class="bi bi-pencil-square custom-icon"></i>
+                        </a>
+                        <a href="./php/delete.php?cpf=<?= $user_data['cpf']?>" class="action_botao delete_botao">
+                            <i class="bi bi-trash3 custom-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            <?php 
+            $counter++; 
+            endwhile; ?>
+        </div>
+    </div>
+    <script src="./js/funcao.js"></script>
 </body>
-</html>     
+</html>

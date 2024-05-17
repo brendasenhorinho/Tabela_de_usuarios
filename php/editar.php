@@ -22,7 +22,7 @@ if(isset($_GET['cpf'])) {
             $sql = "UPDATE tabela_usuario SET nome = '$nome', cpf = '$new_cpf', dataNasc = '$dataNasc' WHERE cpf = '$cpf'";
             if ($conexao->query($sql) === TRUE) {
                 // Redireciona de volta para a página principal após a edição
-                header("Location: teste.php");
+                header("Location: ../index.php");
                 exit();
             } else {
                 echo "Erro ao editar registro: " . $conexao->error;
@@ -44,7 +44,7 @@ if(isset($_GET['cpf'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="./styles/formulario.css">
+    <link rel="stylesheet" href="../styles/formulario.css">
     <title>Editar Usuário</title>
 </head>
 <body>

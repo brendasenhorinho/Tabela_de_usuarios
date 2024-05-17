@@ -9,7 +9,7 @@ if(isset($_GET['cpf'])) {
     $sql = "DELETE FROM tabela_usuario WHERE cpf = '$cpf'";
     if ($conexao->query($sql) === TRUE) {
         // Redireciona de volta para a página principal após a exclusão
-        header("Location: teste.php");
+        header("Location: ../index.php");
         exit();
     } else {
         echo "Erro ao excluir registro: " . $conexao->error;
