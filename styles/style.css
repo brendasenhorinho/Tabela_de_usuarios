@@ -1,0 +1,81 @@
+:root{
+    --cor-fonte:#FFFFFF;
+    --fonte-principal: 'Poppins';
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#body{ 
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--fonte-principal);
+    background: linear-gradient(-40deg, rgb(227, 254, 247), rgb(119, 176, 170), rgb(19, 93, 102));
+
+}
+
+.corpo{
+   background-color: #003C43;
+   border-radius: 10px;
+    padding: 80px;
+    position: absolute;
+    top:10%;
+    left:40%;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+}
+.botao_adcionar{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    color: var(--cor-fonte);
+    
+    
+}
+
+.tabela{
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.botao_dados {
+    flex-direction: column;
+
+}
+
+.input_usuario {
+    display: none;
+}
+
+.informacao-header {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.infomacao-oculto {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.input_usuario:checked + .informacao-header + .infomacao-oculto {
+    max-height: 2000px; 
+}
+
+.titulo{
+    text-align: center;
+}
+
+.custom-icon{
+    color: #77B0AA;
+}

@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 3em;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(-40deg, rgb(227, 254, 247), rgb(119, 176, 170), rgb(19, 93, 102));
+    background-size: cover;
+    background-repeat: repeat;
+
+}
+
+#to_do {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: #003C43;
+    padding: 18px;
+    border-radius: 8px;
+    width: 490px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+}
+
+#to_do h1 {
+    color: white;
+    font-size: 28px;
+    text-transform: uppercase;
+}
+
+.to-do-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+#tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 400px;
+    overflow: auto;
+
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: #135D66 ;
+    padding: 8px 12px;
+    border-radius: 4px;
+
+}
+
+.oculto {
+    display: none;
+    justify-content: baseline;
+    gap: 5px;
+    margin-right: 2em;
+    margin-left: 7px;
+    font-size: 15px;
+}
+
+.task .task-description{
+    font-size: 16px;
+    color: white;
+    padding: 4px 0px;
+    width: 100%;
+}
+
+.task .task-actions {
+    display: flex;
+    gap: 10px ;
+}
+
+.action_botao {
+    font-size: 16px;
+    color: #E3FEF7;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.progress {
+    background-color: #77B0AA; 
+    color: #fff; 
+    border: none; 
+    padding: 5px 8px;
+    font-size: 12px; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    margin-right: 5px ;
+}
+
+.progress:hover {
+    background-color: #003C43;
+}
+
+
+   
